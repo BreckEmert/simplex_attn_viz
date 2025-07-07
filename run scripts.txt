@@ -1,0 +1,5 @@
+manimgl attention_flow.py SelfAttentionFlow -w --file_name attention_flow -o -r 1920x1400
+manimgl simplex_attention_flow.py SelfAttentionFlow -w --file_name simplex_attention_flow -o -r 1920x1400
+
+# Ultra HD:
+manimgl simplex_attention_flow.py SelfAttentionFlow --uhd -w -o
