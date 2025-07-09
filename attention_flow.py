@@ -4,9 +4,9 @@ import numpy as np
 
 class Dial(VGroup):
     """Yellow needle at angle determined by s ∈ [0, 1]."""
-    def __init__(self, s: float, radius: float = 0.375, **kwargs):
+    def __init__(self, s: float, radius: float = 0.375, stroke_color=YELLOW, **kwargs):
         super().__init__(**kwargs)
-        needle = Line(ORIGIN, radius * RIGHT, stroke_width=4, stroke_color=YELLOW)
+        needle = Line(ORIGIN, radius * RIGHT, stroke_width=4, stroke_color=stroke_color)
         needle.rotate(interpolate(-PI / 2, PI / 2, s))
         self.add(needle)
 
@@ -36,8 +36,8 @@ class SelfAttentionFlow(Scene):
         def mk_arrow(x0, x1, y):
             return Arrow([x0, y, 0], [x1, y, 0], buff=0, stroke_width=4)
 
-        def mk_dial(s, x, y):
-            return Dial(s).move_to([x, y, 0])
+        def mk_dial(s, x, y, stroke_color=YELLOW):
+            return Dial(s, stroke_color=stroke_color).move_to([x, y, 0])
 
         # ---------- build left/right columns ----------
         row_y = lambda r: (n / 2 - r) * 1.2
@@ -47,7 +47,7 @@ class SelfAttentionFlow(Scene):
         for i, w in enumerate(words):
             y = row_y(i)
             # keys
-            Ld.add(mk_dial(key_sims[i], X_KEY_DIAL, y))
+            Ld.add(mk_dial(key_sims[i], X_KEY_DIAL, y, stroke_color=BLUE))
             La.add(mk_arrow(X_KEY_ARROW, X_KEY_DIAL - (DIAL_R + GAP_AD), y))
             Lw.add(Text(w).next_to(La[-1], LEFT, WORD_GAP).set_y(y))
             # queries

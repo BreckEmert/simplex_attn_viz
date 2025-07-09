@@ -1,0 +1,2 @@
+window:
+  samples: 8          # 4 or 8 are common; 8 = Grant’s default
